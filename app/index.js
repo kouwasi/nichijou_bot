@@ -14,7 +14,7 @@ client.on('message', (msg) => {
     request(`https://api.giphy.com/v1/gifs/random?api_key=${config.giphy.token}&tag=nichijou&rating=R`, (error, response, body) => {
       let jsonBody = JSON.parse(body);
 
-      msg.channel.send(jsonBody.data.images.original_still.url)
+      msg.channel.send(jsonBody.data.url)
       .catch(console.error)
     })
 
