@@ -1,0 +1,22 @@
+{
+  "name": "nichijou_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kouwasi/nichijou_bot.git"
+  },
+  "author": "kouwasi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kouwasi/nichijou_bot/issues"
+  },
+  "homepage": "https://github.com/kouwasi/nichijou_bot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
