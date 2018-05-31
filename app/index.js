@@ -19,6 +19,8 @@ client.on('message', async (msg) => {
 
     msg.channel.send(url)
     .catch(console.error)
+  } else if(msg.content === '!!!') {
+    msg.channel.send(baobab())
   }
 })
 
@@ -44,6 +46,25 @@ function getUrlFromTenor() {
       }
     })
   })
+}
+
+function baobab() {
+	let parts = ['バ', 'オ', 'ブ', 'ヲ', 'ン', 'ビ', 'ボ','ァ','ォ','ヮ','ッ', 'ー']
+	let tail = 'の樹'
+	let loop = 4 + getRandomInt(20)
+	let value
+
+	for(i=0; i <= loop; i++) {
+		if(value) {
+			value += parts[getRandomInt(12)]
+		} else {
+			value = parts[getRandomInt(7)]
+		}
+		
+	}
+	value += tail
+
+	return value
 }
 
 function getRandomInt(max) {
