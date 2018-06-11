@@ -49,22 +49,20 @@ function getUrlFromTenor() {
 }
 
 function baobab() {
-	let parts = ['バ', 'オ', 'ブ', 'ヲ', 'ン', 'ビ', 'ボ','ァ','ォ','ヮ','ッ', 'ー']
-	let tail = 'の樹'
-	let loop = 4 + getRandomInt(20)
-	let value
+  let parts = ['バ', 'オ', 'ブ', 'ヲ', 'ン', 'ビ', 'ボ','ァ','ォ','ヮ','ッ', 'ー'],
+      tail = 'の樹',
+      loop = getRandomInt(15),
+      value
 
-	for(i=0; i <= loop; i++) {
-		if(value) {
-			value += parts[getRandomInt(12)]
-		} else {
-			value = parts[getRandomInt(7)]
-		}
-		
-	}
-	value += tail
-
-	return value
+  for(i=0; i <= loop; i++) {
+    if(value) {
+      value += parts[getRandomInt(12)]
+    } else {
+      value = parts[getRandomInt(7)]
+    }
+  }
+  
+  return value + tail
 }
 
 function getRandomInt(max) {
