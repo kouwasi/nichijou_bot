@@ -10,19 +10,32 @@ client.on('ready', () => {
 client.on('message', async (msg) => {
   if(msg.author.id == client.user.id) return
 
-  if(msg.content === '!!') {
-    if(getRandomInt(2) == 0) {
-      url = await getUrlFromTenor().catch(console.error)
-    } else {
-      url = await getUrlFromGiphy().catch(console.error)
-    }
+  let command = msg.content.split(' ')
 
-    msg.channel.send(url)
-    .catch(console.error)
-  } else if(msg.content === '!!!') {
-    msg.channel.send(baobab())
+  if(command[0] == undefined) return
+
+  switch (command[0]) {
+    case '!':
+      msg.channel.send(scramble(msg.content))
+      break;
+    case '!!':
+      commandGif(msg)
+      break;
+    case '!!!':
+      msg.channel.send(baobab())
   }
 })
+
+async function commandGif(msg) {
+  if(getRandomInt(2) == 0) {
+    url = await getUrlFromTenor().catch(console.error)
+  } else {
+    url = await getUrlFromGiphy().catch(console.error)
+  }
+
+  msg.channel.send(url)
+  .catch(console.error)
+}
 
 function getUrlFromGiphy() {
   return new Promise((resolve, reject ) => {
@@ -46,6 +59,18 @@ function getUrlFromTenor() {
       }
     })
   })
+}
+
+function scramble(msg) {
+  msg = msg.slice(2)
+  msgArray = Array.from(msg)
+
+  let reply = '';
+  for(i=0; i < msgArray.length; i++) {
+    reply += msgArray[getRandomInt(msgArray.length-1)]
+  }
+
+  return reply
 }
 
 function baobab() {
