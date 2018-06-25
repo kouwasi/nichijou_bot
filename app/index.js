@@ -23,6 +23,7 @@ client.on('message', async (msg) => {
       break;
     case '!!!':
       msg.channel.send(baobab())
+      break;
   }
 })
 
@@ -67,7 +68,7 @@ function scramble(msg) {
 
   let reply = '';
   for(i=0; i < msgArray.length; i++) {
-    reply += msgArray[getRandomInt(msgArray.length-1)]
+    reply += msgArray[getRandomInt(msgArray.length)]
   }
 
   return reply
@@ -75,7 +76,6 @@ function scramble(msg) {
 
 function baobab() {
   let parts = ['バ', 'オ', 'ブ', 'ヲ', 'ン', 'ビ', 'ボ','ァ','ォ','ヮ','ッ', 'ー'],
-      tail = 'の樹',
       loop = getRandomInt(15),
       value
 
@@ -87,7 +87,7 @@ function baobab() {
     }
   }
   
-  return value + tail
+  return value + 'の樹'
 }
 
 function getRandomInt(max) {
