@@ -17,7 +17,7 @@ client.on('message', async (msg) => {
 
   switch (command[0]) {
     case '!':
-      msg.channel.send(scramble(msg.content))
+      msg.channel.send(shuffle(msg.content))
       break;
     case '!!':
       commandGif(msg)
@@ -31,9 +31,13 @@ client.on('message', async (msg) => {
 async function commandGif(msg) {
   const tagName = encodeURIComponent(msg.content.slice(3))
   if(getRandomInt(2) == 0) {
-    url = await getUrlFromTenor(tagName).catch(console.error)
+    url = await getUrlFromTenor(tagName).catch(error => {
+      msg.send(`\`\`\`${error}\`\`\``)
+    })
   } else {
-    url = await getUrlFromGiphy(tagName).catch(console.error)
+    url = await getUrlFromGiphy(tagName).catch(error => {
+      msg.send(`\`\`\`${error}\`\`\``)
+    })
   }
 
   msg.channel.send(url)
@@ -68,7 +72,7 @@ function getUrlFromTenor(tagName = 'nichijou') {
   })
 }
 
-function scramble(msg) {
+function shuffle(msg) {
   msg = msg.slice(2)
   msgArray = Array.from(msg)
 
