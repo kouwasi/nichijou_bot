@@ -31,12 +31,12 @@ async function commandGif(msg) {
   const tagName = encodeURIComponent(msg.content.slice(3))
   
   if(getRandomInt(2) == 0) {
-    url = await getUrlFromTenor(tagName).catch(error => {
+    url = await getUrlFromTenor(tagName ? tagName : 'nichijou').catch(error => {
       console.log(error)
       msg.channel.send(`\`\`\`${error}\`\`\``)
     })
   } else {
-    url = await getUrlFromGiphy(tagName).catch(error => {
+    url = await getUrlFromGiphy(tagName ? tagName : 'nichijou').catch(error => {
       console.log(error)
       msg.channel.send(`\`\`\`${error}\`\`\``)
     })
@@ -47,7 +47,7 @@ async function commandGif(msg) {
   }
 }
 
-function getUrlFromGiphy(tagName = 'nichijou') {
+function getUrlFromGiphy(tagName) {
   return new Promise((resolve, reject) => {
     request(`https://api.giphy.com/v1/gifs/random?api_key=${config.giphy.token}&tag=${tagName}&rating=R`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
@@ -59,7 +59,7 @@ function getUrlFromGiphy(tagName = 'nichijou') {
   })
 }
 
-function getUrlFromTenor(tagName = 'nichijou') {
+function getUrlFromTenor(tagName) {
   return new Promise((resolve, reject) => {
     request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
