@@ -20,7 +20,7 @@ client.on('message', async (msg) => {
       msg.channel.send(scramble(msg.content))
       break;
     case '!!':
-      commandGif(msg)
+      commandGif(msg.content)
       break;
     case '!!!':
       msg.channel.send(baobab())
