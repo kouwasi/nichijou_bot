@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const client = new Discord.Client({ autoReconnect: true })
 const request = require('request');
 const config = require('./config.json')
-const URI = require('url')
 
 client.on('ready', () => {
   console.log("Ready!")
@@ -62,11 +61,11 @@ function getUrlFromTenor(tagName = 'nichijou') {
   return new Promise((resolve, reject) => {
     request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
-        try {
+        if(JSON.parse(body).results[0].url) {
           resolve(JSON.parse(body).results[0].url)
-        } catch(exception) {
-          reject(exception.toString())
-        }
+        } else {
+          reject('Error: Invalid format response.')
+        }    
       } else {
         reject(error)
       }
