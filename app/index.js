@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client({ autoReconnect: true })
 const request = require('request');
 const config = require('./config.json')
+const URI = require('url')
 
 client.on('ready', () => {
   console.log("Ready!")
@@ -19,7 +20,7 @@ client.on('message', async (msg) => {
       msg.channel.send(scramble(msg.content))
       break;
     case '!!':
-      commandGif(command, msg)
+      commandGif(msg)
       break;
     case '!!!':
       msg.channel.send(baobab())
@@ -27,8 +28,8 @@ client.on('message', async (msg) => {
   }
 })
 
-async function commandGif(command, msg) {
-  const tagName = command[1]
+async function commandGif(msg) {
+  const tagName = encodeURIComponent(msg.slice(3))
   if(getRandomInt(2) == 0) {
     url = await getUrlFromTenor(tagName).catch(console.error)
   } else {
