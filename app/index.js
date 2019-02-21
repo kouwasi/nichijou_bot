@@ -32,12 +32,12 @@ async function commandGif(msg) {
   if(getRandomInt(2) == 0) {
     url = await getUrlFromTenor(tagName).catch(error => {
       console.log(error)
-      msg.send(`\`\`\`${error}\`\`\``)
+      msg.channel.send(`\`\`\`${error}\`\`\``)
     })
   } else {
     url = await getUrlFromGiphy(tagName).catch(error => {
       console.log(error)
-      msg.send(`\`\`\`${error}\`\`\``)
+      msg.channel.send(`\`\`\`${error}\`\`\``)
     })
   }
 
