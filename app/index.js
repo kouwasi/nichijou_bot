@@ -29,6 +29,7 @@ client.on('message', async (msg) => {
 
 async function commandGif(msg) {
   const tagName = encodeURIComponent(msg.content.slice(3))
+  
   if(getRandomInt(2) == 0) {
     url = await getUrlFromTenor(tagName).catch(error => {
       console.log(error)
@@ -41,8 +42,9 @@ async function commandGif(msg) {
     })
   }
 
-  msg.channel.send(url)
-  .catch(console.error)
+  if(url) {
+    msg.channel.send(url).catch(console.error)
+  }
 }
 
 function getUrlFromGiphy(tagName = 'nichijou') {
