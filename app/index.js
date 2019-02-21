@@ -32,10 +32,12 @@ async function commandGif(msg) {
   const tagName = encodeURIComponent(msg.content.slice(3))
   if(getRandomInt(2) == 0) {
     url = await getUrlFromTenor(tagName).catch(error => {
+      console.log(error)
       msg.send(`\`\`\`${error}\`\`\``)
     })
   } else {
     url = await getUrlFromGiphy(tagName).catch(error => {
+      console.log(error)
       msg.send(`\`\`\`${error}\`\`\``)
     })
   }
@@ -63,7 +65,7 @@ function getUrlFromTenor(tagName = 'nichijou') {
         try {
           resolve(JSON.parse(body).results[0].url)
         } catch(exception) {
-          reject(exception)
+          reject(exception.toString())
         }
       } else {
         reject(error)
