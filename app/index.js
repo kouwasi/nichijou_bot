@@ -62,8 +62,8 @@ function getUrlFromTenor(tagName = 'nichijou') {
       if(!error && response.statusCode == 200) {
         try {
           resolve(JSON.parse(body).results[0].url)
-        } catch {
-          reject("Json parse error.")
+        } catch(exception) {
+          reject(exception)
         }
       } else {
         reject(error)
