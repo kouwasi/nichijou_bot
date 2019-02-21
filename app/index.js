@@ -19,7 +19,7 @@ client.on('message', async (msg) => {
       msg.channel.send(scramble(msg.content))
       break;
     case '!!':
-      commandGif(msg)
+      commandGif(command, msg)
       break;
     case '!!!':
       msg.channel.send(baobab())
@@ -27,20 +27,21 @@ client.on('message', async (msg) => {
   }
 })
 
-async function commandGif(msg) {
+async function commandGif(command, msg) {
+  const tagName = command[1]
   if(getRandomInt(2) == 0) {
-    url = await getUrlFromTenor().catch(console.error)
+    url = await getUrlFromTenor(tagName).catch(console.error)
   } else {
-    url = await getUrlFromGiphy().catch(console.error)
+    url = await getUrlFromGiphy(tagName).catch(console.error)
   }
 
   msg.channel.send(url)
   .catch(console.error)
 }
 
-function getUrlFromGiphy() {
+function getUrlFromGiphy(tagName = 'nichijou') {
   return new Promise((resolve, reject ) => {
-    request(`https://api.giphy.com/v1/gifs/random?api_key=${config.giphy.token}&tag=nichijou&rating=R`, (error, response, body) => {
+    request(`https://api.giphy.com/v1/gifs/random?api_key=${config.giphy.token}&tag=${tagName}&rating=R`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
         resolve(JSON.parse(body).data.url)
       } else {
@@ -50,9 +51,9 @@ function getUrlFromGiphy() {
   })
 }
 
-function getUrlFromTenor() {
+function getUrlFromTenor(tagName = 'nichijou') {
   return new Promise((resolve, reject ) => {
-    request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=nichijou&safesearch=moderate&limit=1`, (error, response, body) => {
+    request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
         resolve(JSON.parse(body).results[0].url)
       } else {
