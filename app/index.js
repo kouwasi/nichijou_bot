@@ -61,7 +61,7 @@ function getUrlFromTenor(tagName = 'nichijou') {
   return new Promise((resolve, reject) => {
     request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
-        if(JSON.parse(body).results[0].url) {
+        if(JSON.parse(body).results[0]) {
           resolve(JSON.parse(body).results[0].url)
         } else {
           reject('Error: Invalid format response.')
