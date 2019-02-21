@@ -20,7 +20,7 @@ client.on('message', async (msg) => {
       msg.channel.send(scramble(msg.content))
       break;
     case '!!':
-      commandGif(msg.content)
+      commandGif(msg)
       break;
     case '!!!':
       msg.channel.send(baobab())
@@ -29,7 +29,7 @@ client.on('message', async (msg) => {
 })
 
 async function commandGif(msg) {
-  const tagName = encodeURIComponent(msg.slice(3))
+  const tagName = encodeURIComponent(msg.content.slice(3))
   if(getRandomInt(2) == 0) {
     url = await getUrlFromTenor(tagName).catch(console.error)
   } else {
