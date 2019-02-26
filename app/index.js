@@ -9,7 +9,7 @@ String.prototype.toGenshi = function() {
   let morphs = MeCab.parseSyncFormat(text);
   let replyArray = [];
 
-  morphs.map(x => x.lexical != '助詞' ? replyArray.push(x.reading) : '');
+  morphs.map(x => !['助詞', '助動詞'].includes(x.lexical) ? replyArray.push(x.reading) : '');
 
   return replyArray.join(' ');
 }
