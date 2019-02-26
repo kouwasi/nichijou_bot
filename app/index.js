@@ -40,7 +40,7 @@ client.on('message', async (msg) => {
       break;
   }
 
-  if (command[0] in ['!g', '!genshi']) {
+  if (['!g', '!genshi'].includes(command[0])) {
     msg.channel.send(msg.content.toGenshi());
   }
 });
