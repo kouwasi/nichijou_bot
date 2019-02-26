@@ -7,5 +7,8 @@
   },
   "tenor": {
     "token": "your tenor token here"
+  },
+  "mecab": {
+    "dic": "/usr/local/lib/mecab/dic/mecab-ipadic-neologd/"
   }
 }
