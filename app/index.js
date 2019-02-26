@@ -41,7 +41,7 @@ client.on('message', async (msg) => {
   }
 
   if (['!g', '!genshi'].includes(command[0])) {
-    msg.channel.send(msg.content.toGenshi());
+    msg.channel.send(command[1].toGenshi());
   }
 });
 
