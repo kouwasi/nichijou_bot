@@ -21,8 +21,7 @@ ENV WORKDIR /app
 RUN mkdir -p ${WORKDIR}
 WORKDIR ${WORKDIR}
 
-RUN apt-get update && \
-    apt-get install -q -y mecab-ipadic mecab-ipadic-utf8
+RUN apt-get update && apt-get install -q -y mecab
 
 COPY --from=0 /opt/mecab-ipadic-neologd /opt/mecab-ipadic-neologd
 COPY . ${WORKDIR}
