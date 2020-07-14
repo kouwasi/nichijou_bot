@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({ autoReconnect: true });
 const request = require('request');
-const config = require('./config.json');
 const MeCab = new require('mecab-async');
 
 String.prototype.toGenshi = function() {
