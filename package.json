@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/kouwasi/nichijou_bot#readme",
   "dependencies": {
-    "discord.js": "^11.3.2",
-    "mecab-async": "kouwasi/node-mecab-async#master",
-    "request": "^2.87.0"
+    "discord.js": "^11.6.4",
+    "mecab-async": "github:kouwasi/node-mecab-async#master",
+    "request": "^2.88.2"
   }
 }
