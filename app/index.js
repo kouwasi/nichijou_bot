@@ -18,7 +18,7 @@ client.on('ready', () => {
   console.log("Ready!");
 
   // init mecab
-  MeCab.command = `mecab -d ${config.mecab.dic}`;
+  MeCab.command = `mecab -d ${process.env.MECAB_DICTIONARY_PATH}`;
 });
 
 client.on('message', async (msg) => {
@@ -68,7 +68,7 @@ async function commandGif(msg) {
 
 function getUrlFromGiphy(tagName) {
   return new Promise((resolve, reject) => {
-    request(`https://api.giphy.com/v1/gifs/random?api_key=${config.giphy.token}&tag=${tagName}&rating=R`, (error, response, body) => {
+    request(`https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_TOKEN}&tag=${tagName}&rating=R`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
         resolve(JSON.parse(body).data.url);
       } else {
@@ -80,7 +80,7 @@ function getUrlFromGiphy(tagName) {
 
 function getUrlFromTenor(tagName) {
   return new Promise((resolve, reject) => {
-    request(`https://api.tenor.com/v1/random?key=${config.tenor.token}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
+    request(`https://api.tenor.com/v1/random?key=${process.env.TENOR_TOKEN}&q=${tagName}&safesearch=moderate&limit=1`, (error, response, body) => {
       if(!error && response.statusCode == 200) {
         if(JSON.parse(body).results[0]) {
           resolve(JSON.parse(body).results[0].url)
@@ -126,4 +126,4 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-client.login(config.discord.token);
+client.login(process.env.DISCORD_TOKEN);
